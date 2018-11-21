@@ -1,0 +1,2 @@
+from jeu import *
+launch()

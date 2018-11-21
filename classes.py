@@ -1,0 +1,4 @@
+from deroulementcreaperso import *
+
+creaPerso()
+
