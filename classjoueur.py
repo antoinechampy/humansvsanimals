@@ -103,6 +103,7 @@ class Archer(Joueur):
 				else:
 					dgt=jeu.abso(self,jatt,40)
 					jatt.baisserVie(dgt)
+
 class Guerrier(Joueur):
 
 		
@@ -150,7 +151,6 @@ class Assassin(Joueur):
 			pass
 
 
-
 class Ours(Joueur):
 
 	def attaque1():
@@ -175,10 +175,3 @@ class Lievre(Joueur):
 
 	def attaque1():
 		pass
-
-
-
-
-
-
-
