@@ -1,4 +1,0 @@
-from deroulementcreaperso import *
-
-creaPerso()
-
