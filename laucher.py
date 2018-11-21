@@ -1,2 +1,3 @@
 from jeu import *
-launch()
+#launch()
+testatt()

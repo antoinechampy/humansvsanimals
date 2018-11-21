@@ -1,7 +1,7 @@
 from random import *
 from attaques import *
 import os
-from classjoueur import Joueur
+from classjoueur import *
 
 def creaPerso()->Joueur:
 	nm= choisirNom()
@@ -134,6 +134,7 @@ def choixClasseAnimal()->str:
 def launch()->None:
 	os.system('cls')
 	j1=creaPerso()
+	j2=creaPerso()
 	return None
 
 def donnerAttaque(classe):
@@ -148,21 +149,32 @@ def donnerAttaque(classe):
 	if classe.upper()=="SERPENT": return ["ligoter","ramper","venin","morsure"]
 	if classe.upper()=="LIEVRE": return ["charge","course","ecoute","rage"]
 
-def abso(jattaquant,jattaque,dgts):
-	dgt=int(dgts*(jattanquant.force*0.01))
+def abso(jatq,jattaque,dgts):
+	dgt=int(dgts*(jattaque.force*0.01))
 	abso=(randint(0,jattaque.defense)*0.01)
 	abso=abso*dgt
 	dgt=int(dgt-abso)
 	return dgt
 
-def define(classe,nom,stat):
-	if classe.upper()=="MAGE":return Mage(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="ARCHER":return Archer(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="GUERRIER":return Guerrier(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="PALADIN": return Paladin(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="ASSASSIN":return Assassin(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="OURS": return Ours(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="SANGLIER": return Sanglier(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="AIGLE": return Aigle(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="SERPENT": return Serpent(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
-	if classe.upper()=="LIEVRE": return Lievre(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+def define(classe,nm,stat):
+	j=""
+	if classe.upper()=="MAGE": j=Mage(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="ARCHER": j=Archer(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="GUERRIER": j=Guerrier(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="PALADIN": j=Paladin(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="ASSASSIN": j=Assassin(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="OURS": j=Ours(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="SANGLIER": j=Sanglier(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="AIGLE": j=Aigle(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="SERPENT": j=Serpent(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	if classe.upper()=="LIEVRE": j=Lievre(nm,classe,stat[0],stat[1],stat[2],stat[3],stat[4])
+	return j
+
+def testatt():
+	j1=Archer("Matthieu","Admin",1000,1000,60,60,80)
+	j2=Archer("Matthieu","Admin",1000,1000,60,60,80)
+	for i in range(10):
+		j1.headshot(j2)
+		if j2.vie==0:
+			print("os")
+			j2.vie=10

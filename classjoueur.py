@@ -1,6 +1,10 @@
-class Joueur():
+import abc
+from random import *
+import jeu
 
-	def __init__(self,pseudo,classe,vie,mana,force,vitesse,defense):
+class Joueur(abc.ABC):
+
+	def __init__(self,pseudo,classe,vie,mana,force,vitesse,defense,poison=0):
 		self.pseudo=pseudo
 		self.classe=classe
 		self.vie=vie
@@ -8,6 +12,7 @@ class Joueur():
 		self.force=force
 		self.vitesse=vitesse
 		self.defense=defense
+		self.poison=poison
 		
 
 	def baisserVie(self,dgt):
@@ -35,6 +40,9 @@ class Joueur():
 	def monterDefense(self,d):
 		self.defense+=d
 
+	def monterPoison(self,p):
+		self.poison+=p
+
 	def estMort(self,vie):
 		if vie == 0: return True
 		else : return False
@@ -48,150 +56,129 @@ class Joueur():
 
 class Mage(Joueur):
 
-
 	def fireball(self,jatt):
 		self.baisserMana(15)
 		if jatt.esquive(self):
-			dgt=abso(self,jatt,50)
+			dgt=abso(self,jatt)
 			jatt.baisserVie(dgt)
 
+	def freeze():
+		pass
 
-	def freeze(self,jatt):
-		self.baisserMana(20)
-		if jatt.esquive(self):
-			jatt.baisserVitesse(15)
-			jatt.baisserForce(5)
+	def heal():
+		pass
 
-
-	def heal(self):
-		self.baisserMana(20)
-		lst=[10,10,10,20,20,20,20,20,30]
-		self.monterVie(choice(lst))
-			
-
-	def storm(self,jatt):
-		self.baisserMana(50)
-		if jatt.esquive(self):
-			dgt=abso(self,jatt,75)
-			jatt.baisserVie(dgt)
-
+	def storm():
+		pass
 
 class Archer(Joueur):
 
-
-		def arrow():
-			pass
-
-		def triarrow(self,jatt):
-			self.baisserMana(30)
-			if jatt.esquive(self):
-				dgt=abso(self,jatt)
-				jatt.baisserVie(dgt)
-
-		def poisonarrow():
-			pass
-
-		def headshot():
-			pass
-
-
-class Guerrier(Joueur):
-
-
-		def epee(self,jatt):
-			if jatt.esquive(self):
-				dgt=abso(self,jatt,30)
-				jatt.baisserVie(dgt)
-
-		def heurt(self,jatt):
+		def arrow(self,jatt):
 			self.baisserMana(10)
 			if jatt.esquive(self):
-				dgt=abso(self,jatt,20)
-				jatt.baisserVie(dgt)
-				self.baisserDefense(3)
-
-		def concentration(self):
-			self.baisserMana(20)
-			self.monterDefense(4)
-			self.monterForce(4)
-			self.monterVitesse(4)
-
-		def epbo(self,jatt):#######le guerrier doit jouer en 1er quelque soit sa
-			self.baisserMana(50)#######vitesse. Il ne doit en plus ne prendre aucun
-			if jatt.esquive(self):#####dégat durant le même tour.
-				dgt=abso(self,jatt,60)
+				dgt=jeu.abso(self,jatt,40)
 				jatt.baisserVie(dgt)
 
 
+		def triarrow(self,jatt):
+			self.baisserMana(50)
+			if jatt.esquive(self):
+				lst=[40,40,40,80,80,120]
+				dgt=jeu.abso(self,jatt,choice(lst))
+				jatt.baisserVie(dgt)
+
+		def poisonarrow(self,jatt):
+			self.baisserMana(30)
+			if jatt.esquive(self):
+				jatt.monterPoison(2)
+				dgt=jeu.abso(self,jatt,20)
+				jatt.baisserVie(dgt)
+
+
+		def headshot(self,jatt):
+			self.baisserMana(50)
+			if jatt.esquive(self):
+				if randint(0,100)<=10:
+					jatt.vie=0
+				else:
+					dgt=jeu.abso(self,jatt,40)
+					jatt.baisserVie(dgt)
+class Guerrier(Joueur):
+
+		
+
+		def epee():
+			pass
+
+		def heurt():
+			pass
+
+		def concentration():
+			pass
+
+		def epbo():
+			pass
 
 class Paladin(Joueur):
 
 
-		def marteau(self,jatt):
-			if jatt.esquive(self):
-				dgt=abso(self,jatt,30)
-				jatt.baisserVie(dgt)
 
-		def heal(self):
-			self.baisserMana(20)
-			lst=[10,20,20,20,20,20,30,30,30]
-			self.monterVie(choice(lst))
-
-		def purification(self):
-			self.baisserMana(30)
-			if jatt.esquive(self):
-				self.monterForce(3)
-				self.monterVitesse(3)
-				self.monterDefense(3)
-				jatt.baisserForce(3)
-				jatt.baisserVitesse(3)
-				jatt.baisserDefense(3)
-
-		def lumsac():
-			self.baisserMana(50)
-			self.monterForce(6)
-			self.monterVitesse(7)
-			self.monterDefense(6)
-			if jatt.esquive(self):
-				dgt=abso(self,jatt,60)
-				jatt.baisserVie(dgt)
-				
-			
-class Assassin(Joueur):
-
-
-		def dague(self,jatt):
-			if jatt.esquive(self):
-				dgt=abso(self,jatt,30)
-				jatt.baisserVie(dgt)
-
-		def vanish(self):
-			#####a completer######
+		def marteau():
 			pass
 
-		def evis(self,jatt):
-			self.baisserMana(40)
-			if jatt.esquive(self):
-				dgt=abso(self,jatt,60)
-				jatt.baisserVie(dgt)
+		def heal():
+			pass
 
-		def scream(self,jatt):
-			self.baisserMana(50)
-			###passe au premier tour, tape obligatoirement
-			###invincible durant le tour
-			
+		def purification():
+			pass
+
+		def lumsac():
+			pass
+
+class Assassin(Joueur):
+
+		def dague():
+			pass
+
+		def vanish():
+			pass
+
+		def evis():
+			pass
+
+		def scream():
+			pass
+
 
 
 class Ours(Joueur):
 
+	def attaque1():
+		pass
 
 class Sanglier(Joueur):
 
+	def attaque1():
+		pass
 
 class Aigle(Joueur):
 
+	def attaque1():
+		pass
 
 class Serpent(Joueur):
 
+	def attaque1():
+		pass
 
 class Lievre(Joueur):
+
+	def attaque1():
+		pass
+
+
+
+
+
+
+
