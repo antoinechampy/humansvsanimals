@@ -1,3 +1,3 @@
-import jeu
+from jeu import *
 #launch()
-jeu.testatt()
+testatt()

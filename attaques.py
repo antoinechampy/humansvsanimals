@@ -1,10 +1,4 @@
 from random import *
-
-def heal(jattanquant):
-	jattanquant.baisserMana(20)
-	lst=[10,10,10,10,20,20,20,20,30]
-	jattanquant.monterVie(choice(lst))
-
 """
 Ancienne version
 
@@ -54,3 +48,11 @@ def poisonArrow(jattaque:list,jattanquant:list)->None:
 		dgt=abso()
 	return None
 """
+
+
+
+
+def heal(jattanquant):
+	jattanquant.baisserMana(20)
+	lst=[10,10,10,10,20,20,20,20,30]
+	jattanquant.monterVie(choice(lst))
