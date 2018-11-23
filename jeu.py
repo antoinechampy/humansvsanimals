@@ -170,10 +170,7 @@ def define(classe,nm,stat):
 	return j
 
 def testatt():
-	j1=Archer("Matthieu","Admin",1000,1000,60,60,80)
+	os.system("cls")
+	j1=Mage("Matthieu","Admin",60,1000,60,60,80)
 	j2=Archer("Matthieu","Admin",1000,1000,60,60,80)
-	for i in range(10):
-		j1.headshot(j2)
-		if j2.vie==0:
-			print("os")
-			j2.vie=10
+	j1.afficherVie()

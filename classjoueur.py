@@ -1,6 +1,8 @@
 import abc
 from random import *
 import jeu
+import os
+import time
 
 class Joueur(abc.ABC):
 
@@ -14,6 +16,14 @@ class Joueur(abc.ABC):
 		self.defense=defense
 		self.poison=poison
 		
+	def afficherVie(self):
+		os.system("color C")
+		for i in range(self.vie):
+			print("+", end="")	
+		pause=input("")
+		os.system("color F")
+		
+		os.system("cls")
 
 	def baisserVie(self,dgt):
 		self.vie-=dgt
@@ -103,7 +113,6 @@ class Archer(Joueur):
 				else:
 					dgt=jeu.abso(self,jatt,40)
 					jatt.baisserVie(dgt)
-
 class Guerrier(Joueur):
 
 		
@@ -151,6 +160,7 @@ class Assassin(Joueur):
 			pass
 
 
+
 class Ours(Joueur):
 
 	def attaque1():
@@ -175,3 +185,10 @@ class Lievre(Joueur):
 
 	def attaque1():
 		pass
+
+
+
+
+
+
+
