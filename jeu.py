@@ -96,7 +96,6 @@ def choixClasse()->str:
 	
 	if choixRace=="HUMAIN" or choixRace=="H": classe=choixClasseHumain() 
 	elif choixRace=="ANIMAL" or choixRace=="A": classe=choixClasseAnimal()
-	
 	return classe
 
 def choixClasseHumain()->str:
